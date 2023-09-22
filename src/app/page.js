@@ -27,6 +27,14 @@ export default function Home() {
           </a>
         </div>
       </div>
+function shuffleArray(array) {
+  const newArray = [...array];
+  for (let i = newArray.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
+  }
+  return newArray;
+}
 
       <div className="relative flex place-items-center before:absolute before:h-[300px] before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 before:lg:h-[360px] z-[-1]">
         <Image
@@ -56,6 +64,10 @@ export default function Home() {
             Find in-depth information about Next.js features and API.
           </p>
         </a>
+  useEffect(() => {
+    const shuffledIcons = shuffleArray([...icons, ...icons]);
+    setCards(shuffledIcons.map((icon, index) => ({ icon, id: index, isFlipped: false })));
+  }, []);
 
         <a
           href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
@@ -73,6 +85,9 @@ export default function Home() {
             Learn about Next.js in an interactive course with&nbsp;quizzes!
           </p>
         </a>
+    if (flippedIndices.includes(index) || flippedIndices.length === 2) {
+      return;
+    }
 
         <a
           href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
@@ -90,6 +105,8 @@ export default function Home() {
             Explore the Next.js 13 playground.
           </p>
         </a>
+    const updatedCards = [...cards];
+    updatedCards[index].isFlipped = true;
 
         <a
           href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
@@ -107,7 +124,56 @@ export default function Home() {
             Instantly deploy your Next.js site to a shareable URL with Vercel.
           </p>
         </a>
+    const newFlippedIndices = [...flippedIndices, index];
+    setFlippedIndices(newFlippedIndices);
+
+    if (newFlippedIndices.length === 2) {
+      const [firstIndex, secondIndex] = newFlippedIndices;
+
+      if (cards[firstIndex].icon === cards[secondIndex].icon) {
+        setTimeout(() => {
+          setFlippedIndices([]);
+        }, 1000);
+      } else {
+        setTimeout(() => {
+          updatedCards[firstIndex].isFlipped = false;
+          updatedCards[secondIndex].isFlipped = false;
+          setCards(updatedCards);
+          setFlippedIndices([]);
+        }, 1000);
+      }
+
+      setMoves(moves + 1);
+    }
+  };
+
+  const resetGame = () => {
+    setMoves(0);
+    setFlippedIndices([]);
+    setCards(shuffleArray([...icons, ...icons]).map((icon, index) => ({ icon, id: index, isFlipped: false })));
+  };
+
+  const isGameWon = cards.every((card) => card.isFlipped);
+
+      <div className="flex flex-wrap max-w-md mx-auto justify-center">
+        {cards.map((card, index) => (
+          <div
+            key={card.id}
+            className={`w-24 md:w-28 h-24 md:h-28 flex justify-center items-center cursor-pointer card ${card.isFlipped ? 'flipped' : ''}`}
+            onClick={() => handleCardClick(index)}
+          >
+            <div className="card-icon">
+              {card.isFlipped ? (
+                <FontAwesomeIcon icon={card.icon} size="4x" />
+              ) : (
+                <FontAwesomeIcon icon={faQuestionCircle} size="4x" />
+              )}
       </div>
     </main>
-  )
+        <p className="py-2 md:px-4">Moves: {moves}</p>
+        <button className="py-2 md:px-4" onClick={resetGame}>Reset Game</button>
+        {isGameWon && <p>Congratulations! You won!</p>}
+
+      </span>
 }
+
