@@ -22,11 +22,11 @@ body {
 
 
 .card {
-  background-color: #ccc;
+  background-color: #8b8989;
   margin: 5px;
   transition: background-color 0.3s ease-in-out;
 }
 
 .card.flipped {
-  background-color: rgba(223, 223, 223, .20);
+  background-color: rgb(39, 70, 116);
 }
