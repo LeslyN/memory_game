@@ -65,7 +65,7 @@ function Home() {
 
   return (
     <div className="text-center p-3 md:p-20">
-      <h1 className="py-10 text-xl font-semibold tracking-wide">Memory Matching Game</h1>
+      <h1 className="py-10 text-xl font-semibold tracking-wide text-black">Memory Matching Game</h1>
       <div className="flex flex-wrap max-w-md mx-auto justify-center">
         {cards.map((card, index) => (
           <div
@@ -83,12 +83,12 @@ function Home() {
           </div>
         ))}
       </div>
-      <span className="flex flex-col md:flex-row justify-center items-center mx-auto text-md font-medium tracking-wide">
+      <span className="flex flex-col md:flex-row justify-center items-center mx-auto text-md font-medium tracking-wide text-black md:mt-4">
         <p className="py-2 md:px-4">Moves: {moves}</p>
-        <button className="py-2 md:px-4" onClick={resetGame}>Reset Game</button>
-        {isGameWon && <p>Congratulations! You won!</p>}
+        <button className="py-2 md:px-4 border-4 border-[#1565c0] rounded-lg px-6 hover:border-[#42a5f5]" onClick={resetGame}>Reset Game</button>
 
       </span>
+      {isGameWon && !(moves === 0) && <p className="py-6 text-xl font-semibold text-black">Congratulations! You won!</p>}
     </div>
   );
 }
