@@ -17,16 +17,18 @@
 }
 
 body {
+  font-family: "MesloLGS Nerd Font Mono", sans-serif, "system-ui", "ui-sans-serif";
+  background-color: #003b81;
   color: rgb(var(--foreground-rgb));
 }
 
 
 .card {
-  background-color: #8b8989;
+  background-color: rgb(28 27 27 / 84%);
   margin: 5px;
   transition: background-color 0.3s ease-in-out;
 }
 
 .card.flipped {
-  background-color: rgb(39, 70, 116);
+  background-color: #03A9F4;
 }

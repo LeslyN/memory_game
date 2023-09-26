@@ -64,13 +64,13 @@ function Home() {
   const isGameWon = cards.every((card) => card.isFlipped);
 
   return (
-    <div className="text-center p-3 md:p-20">
-      <h1 className="py-10 text-xl font-semibold tracking-wide text-black">Memory Matching Game</h1>
+    <div className="text-center p-3 md:p-36 min-h-screen flex flex-col justify-center max-w-full items-center text-white">
+      <h1 className="py-10 text-xl font-semibold tracking-wide">Memory Matching Game</h1>
       <div className="flex flex-wrap max-w-md mx-auto justify-center">
         {cards.map((card, index) => (
           <div
             key={card.id}
-            className={`w-24 md:w-28 h-24 md:h-28 flex justify-center items-center cursor-pointer card ${card.isFlipped ? 'flipped' : ''}`}
+            className={`w-24 md:w-32 h-24 md:h-32 flex justify-center items-center cursor-pointer card ${card.isFlipped ? 'flipped' : ''}`}
             onClick={() => handleCardClick(index)}
           >
             <div className="card-icon">
@@ -83,12 +83,11 @@ function Home() {
           </div>
         ))}
       </div>
-      <span className="flex flex-col md:flex-row justify-center items-center mx-auto text-md font-medium tracking-wide text-black md:mt-4">
-        <p className="py-2 md:px-4">Moves: {moves}</p>
-        <button className="py-2 md:px-4 border-4 border-[#1565c0] rounded-lg px-6 hover:border-[#42a5f5]" onClick={resetGame}>Reset Game</button>
-
+      <span className="flex flex-col md:flex-row text-md font-medium tracking-wide py-8 items-center">
+        <p className="mx-6">Moves: {moves}</p>
+        <button className="border-4 border-[#1565c0] rounded-lg px-6 py-2 mx-6 hover:border-[#42a5f5]" onClick={resetGame}>Reset Game</button>
       </span>
-      {isGameWon && !(moves === 0) && <p className="py-6 text-xl font-semibold text-black">Congratulations! You won!</p>}
+      {isGameWon && !(moves === 0) && <p className="py-4 text-xl font-semibold">Congratulations! You won!</p>}
     </div>
   );
 }
