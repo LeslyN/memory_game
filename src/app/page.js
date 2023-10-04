@@ -84,7 +84,7 @@ function Home() {
         ))}
       </div>
       <span className="flex flex-col md:flex-row text-md font-medium tracking-wide py-8 items-center">
-        <p className="mx-6">Moves: {moves}</p>
+        <p className="mx-6 mb-4 md:mb-0">Moves: {moves}</p>
         <button className="border-4 border-[#1565c0] rounded-lg px-6 py-2 mx-6 hover:border-[#42a5f5]" onClick={resetGame}>Reset Game</button>
       </span>
       {isGameWon && !(moves === 0) && <p className="py-4 text-xl font-semibold">Congratulations! You won!</p>}
